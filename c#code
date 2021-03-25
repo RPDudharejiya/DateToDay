@@ -1,0 +1,48 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            // Program to get Day from Date
+            int[] m1 = { 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5 };
+            int y1,y2,y3;
+            String[] day = { "Sunday", "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday" , "Saturday" };
+            DateTime date;
+            Console.WriteLine("Enter any valid date(Format:MM/dd/yyyy)");
+            try
+            {
+                date = Convert.ToDateTime(Console.ReadLine());
+                int year = date.Year;
+                int month = date.Month;
+                int dt = date.Day;
+                while(year<1600 && year>2100)
+                {
+                    if(year<1600)
+                    {
+                        year += 400;
+                    }
+                    else
+                    {
+                        year -= 400;
+                    }
+                }
+                if (year >= 1600 && year < 1700)
+                    y2 = 6;
+                else if (year >= 1700 && year < 1800)
+                    y2 = 4;
+                else if (year >= 1800 && year < 1900)
+                    y2 = 2;
+                else if (year >= 1900 && year < 2000)
+                    y2 = 0;
+                else
+                    y2 = 6;
+                y3 = year % 100;
+                y1 = y3 / 4;
+                Console.WriteLine("Day is " + day[(y1 + y2 + y3 + dt + m1[month - 1]) % 7]);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            Console.ReadLine();
+        }
+    }
